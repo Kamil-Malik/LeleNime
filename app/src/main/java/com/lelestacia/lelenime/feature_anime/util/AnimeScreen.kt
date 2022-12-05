@@ -5,6 +5,6 @@ sealed class AnimeScreen(val route: String) {
     object MyList: AnimeScreen("myList")
     object Explore: AnimeScreen("explore")
     object DetailAnime: AnimeScreen("dashboard/{animeId}") {
-        fun createRoute(animeId: String) = "dashboard/$animeId"
+        fun createRoute(animeId: Int) = "dashboard/$animeId"
     }
 }

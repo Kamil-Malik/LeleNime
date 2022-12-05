@@ -19,7 +19,11 @@ import com.lelestacia.lelenime.feature_anime.ui.component.AnimeCard
 import com.lelestacia.lelenime.feature_anime.ui.viewmodel.SeasonsViewModel
 
 @Composable
-fun DashboardScreen(modifier: Modifier = Modifier, viewModel: SeasonsViewModel = hiltViewModel()) {
+fun DashboardScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SeasonsViewModel = hiltViewModel(),
+    onClicked: (Int) -> Unit
+) {
     val data = viewModel.getPagingData().collectAsLazyPagingItems()
     Column(
         modifier = modifier
@@ -48,7 +52,7 @@ fun DashboardScreen(modifier: Modifier = Modifier, viewModel: SeasonsViewModel =
                         image = anime.image,
                         status = anime.status,
                         onClicked = {
-
+                            onClicked(it)
                         }
                     )
                 }

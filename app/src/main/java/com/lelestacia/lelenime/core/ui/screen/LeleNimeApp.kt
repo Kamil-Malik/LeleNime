@@ -9,14 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.lelestacia.lelenime.core.ui.theme.Orange
 import com.lelestacia.lelenime.core.ui.theme.Purple
 import com.lelestacia.lelenime.feature_anime.ui.component.AnimeBottomBar
 import com.lelestacia.lelenime.feature_anime.ui.screen.DashboardScreen
+import com.lelestacia.lelenime.feature_anime.ui.screen.DetailAnimeScreen
 import com.lelestacia.lelenime.feature_anime.ui.screen.MyListScreen
 import com.lelestacia.lelenime.feature_anime.ui.screen.SearchScreen
 import com.lelestacia.lelenime.feature_anime.util.AnimeScreen
@@ -65,13 +68,21 @@ fun LeleNimeApp(
             modifier = modifier.padding(paddingValues)
         ) {
             composable(AnimeScreen.Dashboard.route) {
-                DashboardScreen()
+                DashboardScreen(onClicked = { animeId ->
+                    navController.navigate(AnimeScreen.DetailAnime.createRoute(animeId))
+                })
             }
             composable(AnimeScreen.Explore.route) {
                 SearchScreen()
             }
             composable(AnimeScreen.MyList.route) {
                 MyListScreen()
+            }
+            composable(AnimeScreen.DetailAnime.route, arguments = listOf(navArgument("animeId"){
+                type = NavType.IntType
+            })) {
+                val id = it.arguments?.getInt("animeId") ?: 0
+                DetailAnimeScreen(id)
             }
         }
     }
