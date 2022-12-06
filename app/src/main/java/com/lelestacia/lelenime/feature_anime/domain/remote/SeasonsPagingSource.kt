@@ -30,7 +30,7 @@ class SeasonsPagingSource @Inject constructor(
                     prevKey = if (apiResponse.pagination?.currentPage == 1) null else currentPage - 1,
                     nextKey = if (apiResponse.pagination?.hasNextPage == true) currentPage + 1 else null
                 )
-            } catch (e: Throwable) {
+            } catch (e: Exception) {
                 LoadResult.Error(e)
             }
         }

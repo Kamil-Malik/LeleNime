@@ -1,10 +1,8 @@
 package com.lelestacia.lelenime.feature_anime.ui.component
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
@@ -16,13 +14,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.lelestacia.lelenime.core.ui.theme.Orange
-import com.lelestacia.lelenime.core.ui.theme.Purple
 import com.lelestacia.lelenime.feature_anime.util.AnimeNavigationItem
 import com.lelestacia.lelenime.feature_anime.util.AnimeScreen
 
 @Composable
-fun AnimeBottomBar(modifier: Modifier = Modifier, navController: NavHostController) {
+fun AnimeBottomBar(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    backgroundColor: Color
+) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
     val animeNavigationItem = listOf(
@@ -44,12 +44,7 @@ fun AnimeBottomBar(modifier: Modifier = Modifier, navController: NavHostControll
     )
     BottomNavigation(
         modifier = modifier,
-        backgroundColor =
-        if (isSystemInDarkTheme()) {
-            Purple
-        } else {
-            Orange
-        }
+        backgroundColor = backgroundColor
     ) {
         animeNavigationItem.map { item ->
             BottomNavigationItem(
@@ -57,12 +52,10 @@ fun AnimeBottomBar(modifier: Modifier = Modifier, navController: NavHostControll
                     Icon(
                         imageVector = item.icon,
                         contentDescription = item.title,
-                        tint = Color.White
                     )
                 },
-                label = {
-                    Text(text = item.title, color = Color.White)
-                },
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.DarkGray,
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navController.navigate(item.screen.route) {

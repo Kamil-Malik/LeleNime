@@ -4,4 +4,6 @@
     <string name="episode">Episodes\t\t:\t%s</string>
     <string name="status">Status\t\t\t\t:\t%s</string>
     <string name="tv_reviewed_by">%s Users</string>
+
+    <string name="anime_cover_image">Anime Cover Image</string>
 </resources>

@@ -10,4 +10,6 @@ interface MainRepository {
     suspend fun getAnimeById(id: Int) : AnimeByIdResponse
 
     fun getSeasonPaging(): Flow<PagingData<SeasonAnimeCard>>
+
+    fun searchAnimeByTitle(title: String) : Flow<PagingData<SeasonAnimeCard>>
 }
